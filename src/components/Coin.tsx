@@ -73,6 +73,8 @@ export function Coin({ coin }: CoinProps) {
   const innerRef = useRef<HTMLDivElement>(null);
   const floatingTextRef = useRef<FloatingTextRef>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const cooldownRef = useRef<boolean>(false);
+  const cooldownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   
   // Get earnings for this coin type
   const earnings = getEarningsPerFlip(coin.typeId);
@@ -83,7 +85,10 @@ export function Coin({ coin }: CoinProps) {
   const handleClick = useCallback((isAutoTrigger: boolean = false) => {
     // Block manual clicks if auto-clicker is enabled
     if (!isAutoTrigger && isAutoClickEnabled) return;
-    if (coin.isFlipping || !coinRef.current || !innerRef.current || !coinTypeData) return;
+    if (coin.isFlipping || cooldownRef.current || !coinRef.current || !innerRef.current || !coinTypeData) return;
+    
+    // Set cooldown to prevent rapid re-triggering
+    cooldownRef.current = true;
     
     // Generate random values for this flip
     const offset = generateLaunchOffset();
@@ -110,16 +115,18 @@ export function Coin({ coin }: CoinProps) {
         }
       },
       onComplete: () => {
-        // Reset z-index and rotations
+        // Reset z-index
         if (coinRef.current) {
           gsap.set(coinRef.current, { zIndex: 1 });
-        }
-        if (innerRef.current) {
-          gsap.set(innerRef.current, { rotateY: 0, rotateX: 0 });
         }
         // Show floating text and complete flip
         floatingTextRef.current?.show();
         completeCoinFlip(coin.id);
+        
+        // Clear cooldown after a small delay to prevent immediate re-trigger
+        cooldownTimeoutRef.current = setTimeout(() => {
+          cooldownRef.current = false;
+        }, 100);
       },
     });
     
@@ -148,23 +155,23 @@ export function Coin({ coin }: CoinProps) {
       ease: 'bounce.out',
     }, peakTime);
     
-    // Main flip rotation (Y-axis)
+    // Main flip rotation (Y-axis) - use "+=" to accumulate rotations
     tl.to(innerRef.current, {
-      rotateY: flipCount * 360,
+      rotateY: `+=${flipCount * 360}`,
       duration: duration,
       ease: 'power2.out',
     }, 0);
     
-    // Add wobble tilt during flight (X-axis)
+    // Add wobble tilt during flight (X-axis) - use relative values
     tl.to(innerRef.current, {
-      rotateX: wobble.rotateX,
+      rotateX: `+=${wobble.rotateX}`,
       duration: peakTime,
       ease: 'power2.out',
     }, 0);
     
-    // Settle the X tilt back to 0
+    // Settle the X tilt back - reverse the wobble
     tl.to(innerRef.current, {
-      rotateX: 0,
+      rotateX: `-=${wobble.rotateX}`,
       duration: fallTime,
       ease: 'bounce.out',
     }, peakTime);
@@ -176,6 +183,9 @@ export function Coin({ coin }: CoinProps) {
     return () => {
       if (timelineRef.current) {
         timelineRef.current.kill();
+      }
+      if (cooldownTimeoutRef.current) {
+        clearTimeout(cooldownTimeoutRef.current);
       }
     };
   }, []);
@@ -219,7 +229,7 @@ export function Coin({ coin }: CoinProps) {
     <div
       ref={coinRef}
       className={`coin coin-type-${coin.typeId}${isAutoClickEnabled ? ' auto-flipping' : ''}`}
-      onClick={() => handleClick(false)}
+      onMouseEnter={() => handleClick(false)}
       style={{
         left: `${coin.position.x}%`,
         top: `${coin.position.y}%`,
@@ -228,7 +238,7 @@ export function Coin({ coin }: CoinProps) {
       }}
       role="button"
       tabIndex={isAutoClickEnabled ? -1 : 0}
-      aria-label={`${coinTypeData.name}${isAutoClickEnabled ? ' (auto-flipping)' : coin.isFlipping ? ' (flipping)' : ' - click to flip'}`}
+      aria-label={`${coinTypeData.name}${isAutoClickEnabled ? ' (auto-flipping)' : coin.isFlipping ? ' (flipping)' : ' - hover to flip'}`}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();

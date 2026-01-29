@@ -401,7 +401,7 @@
 }
 
 .coin-card-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.75;
   cursor: not-allowed;
 }
 
