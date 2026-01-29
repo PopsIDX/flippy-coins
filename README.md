@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# 🪙 Flippy Coins 💰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Un jeu idle/clicker captivant où vous collectionnez et faites tournoyer des pièces pour accumuler des richesses ! ✨
 
-Currently, two official plugins are available:
+## 📖 Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Flippy Coins est un jeu de type idle-clicker développé avec React et TypeScript. Survolez vos pièces pour les faire tournoyer et regardez votre fortune grandir. Achetez de nouvelles pièces, débloquez des auto-clickers, et construisez votre empire numismatique ! 🏆
 
-## React Compiler
+## ⭐ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🎮 Gameplay Principal
+- 🖱️ **Flip de pièces interactif** — Survolez une pièce pour la faire tournoyer et gagner de l'argent
+- 🎬 **Animations fluides** — Animations 3D réalistes avec effets de lancer, rotation et rebond (GSAP)
+- 💎 **Plusieurs types de pièces** — Des pièces basiques aux pièces premium avec des valeurs croissantes
 
-## Expanding the ESLint configuration
+### 🏪 Système de Boutique
+- 🛒 **Achat de pièces** — Agrandissez votre collection avec un coût progressif
+- 📂 **Interface rétractable** — Boutique latérale qui s'ouvre et se ferme élégamment
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🤖 Automatisation
+- ⚡ **Auto-Clickers** — Achetez des auto-flippers pour automatiser le flip de chaque type de pièce
+- 🔘 **Toggle ON/OFF** — Activez ou désactivez les auto-clickers à volonté
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 🎨 Interface
+- 📊 **Affichage en temps réel** — Compteur de monnaie et inventaire de pièces toujours visibles
+- 💫 **Textes flottants** — Feedback visuel des gains et dépenses
+- ✨ **Design moderne** — Interface soignée avec effets visuels et arrière-plan animé
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Stack Technique
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- ⚛️ **React 19** — Interface utilisateur réactive
+- 📘 **TypeScript** — Typage statique pour un code robuste
+- ⚡ **Vite** — Build tool ultra-rapide
+- 🐻 **Zustand** — Gestion d'état simple et performante
+- 🎭 **GSAP** — Animations professionnelles
+
+## 📦 Installation
+
+```bash
+# Cloner le repository
+git clone <repo-url>
+
+# Installer les dépendances
+npm install
+
+# Lancer en développement
+npm run dev
+
+# Build pour production
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Commandes
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Commande | Description |
+|----------|-------------|
+| `npm run dev` | 🔧 Lance le serveur de développement |
+| `npm run build` | 📦 Build pour la production |
+| `npm run preview` | 👁️ Prévisualise le build de production |
+| `npm run lint` | 🔍 Vérifie le code avec ESLint |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+*Fait avec ❤️ et beaucoup de flips* 🪙✨
