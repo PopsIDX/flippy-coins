@@ -43,7 +43,7 @@ function App() {
       <BackgroundPattern />
       <div className="app">
       <header className="header">
-        <h1>Coin Flipper</h1>
+        <h1>Flippy Coins</h1>
         <div className="header-coin-counts">
           {coinTypeIds.map((typeId) => {
             const count = coins.filter((c) => c.typeId === typeId).length;

@@ -1,52 +1,93 @@
 .background-pattern {
   position: fixed;
-  top: -50px;
-  left: -50px;
-  right: -50px;
-  bottom: -50px;
+  top: -100px;
+  left: -100px;
+  right: -100px;
+  bottom: -100px;
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
 }
 
 .pattern-layer {
-  width: calc(100% + 100px);
-  height: calc(100% + 100px);
-  animation: drift 40s linear infinite;
+  width: calc(100% + 200px);
+  height: calc(100% + 200px);
+  animation: drift 25s ease-in-out infinite;
 }
 
 .pattern-row {
   display: flex;
   justify-content: space-around;
-  padding: 20px 0;
+  padding: 12px 0;
+  animation: wave 8s ease-in-out infinite;
+}
+
+.pattern-row:nth-child(odd) {
+  animation-direction: reverse;
+}
+
+.pattern-row:nth-child(3n) {
+  animation-delay: -2s;
+}
+
+.pattern-row:nth-child(3n+1) {
+  animation-delay: -4s;
+}
+
+.pattern-row:nth-child(3n+2) {
+  animation-delay: -6s;
 }
 
 .suit {
-  font-size: 20px;
-  color: rgba(0, 0, 0, 0.12);
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-  animation: pulse 4s ease-in-out infinite;
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.25);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  animation: pulse 4s ease-in-out infinite, float 6s ease-in-out infinite;
 }
 
-.suit:nth-child(4n+1) { animation-delay: 0s; }
-.suit:nth-child(4n+2) { animation-delay: 1s; }
-.suit:nth-child(4n+3) { animation-delay: 2s; }
-.suit:nth-child(4n+4) { animation-delay: 3s; }
+.suit:nth-child(4n+1) { animation-delay: 0s, 0s; }
+.suit:nth-child(4n+2) { animation-delay: 1s, 1.5s; }
+.suit:nth-child(4n+3) { animation-delay: 2s, 3s; }
+.suit:nth-child(4n+4) { animation-delay: 3s, 4.5s; }
 
 .pattern-row:nth-child(odd) .suit:nth-child(2n) {
-  color: rgba(139, 21, 40, 0.1);
+  color: rgba(180, 30, 50, 0.22);
 }
 
 .pattern-row:nth-child(even) .suit:nth-child(2n+1) {
-  color: rgba(139, 21, 40, 0.1);
+  color: rgba(180, 30, 50, 0.22);
 }
 
 @keyframes drift {
-  0% {
-    transform: translate(0, 0);
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
   }
-  100% {
-    transform: translate(-50px, -50px);
+  25% {
+    transform: translate(-40px, -30px) rotate(0.5deg);
+  }
+  50% {
+    transform: translate(-20px, -60px) rotate(0deg);
+  }
+  75% {
+    transform: translate(-60px, -30px) rotate(-0.5deg);
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(3deg);
   }
 }
 
