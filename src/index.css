@@ -1,0 +1,124 @@
+:root {
+  /* Casino Color Palette */
+  --color-felt: #0d4d2b;
+  --color-felt-dark: #0a3d22;
+  --color-felt-light: #116b3a;
+  
+  --color-gold: #d4af37;
+  --color-gold-light: #f4d160;
+  --color-gold-dark: #996515;
+  
+  --color-red: #c41e3a;
+  --color-red-light: #e63950;
+  --color-red-dark: #8b1528;
+  
+  --color-black: #1a1a1a;
+  --color-black-soft: #2d2d2d;
+  --color-black-card: #0f0f0f;
+  
+  --color-cream: #faf6f0;
+  --color-cream-dark: #e8e4dc;
+  --color-ivory: #fffff0;
+  --color-champagne: #f7e7ce;
+  
+  --color-chip-blue: #1e3a5f;
+  --color-chip-green: #228b22;
+  --color-chip-red: #b22222;
+  --color-chip-black: #2f2f2f;
+  --color-chip-white: #f0f0f0;
+  
+  /* Semantic Colors */
+  --color-background: var(--color-felt-dark);
+  --color-surface: var(--color-felt);
+  --color-surface-elevated: var(--color-felt-light);
+  
+  --color-text-primary: var(--color-ivory);
+  --color-text-secondary: var(--color-champagne);
+  --color-text-muted: rgba(250, 246, 240, 0.5);
+  
+  --color-accent: var(--color-gold);
+  --color-accent-hover: var(--color-gold-light);
+  
+  --color-success: #22c55e;
+  --color-danger: var(--color-red);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+  --shadow-gold: 0 0 20px rgba(212, 175, 55, 0.3);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  /* Border */
+  --border-gold: 2px solid var(--color-gold-dark);
+  --border-subtle: 1px solid rgba(212, 175, 55, 0.2);
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 50%;
+  
+  /* Typography */
+  --font-display: 'Cinzel', 'Palatino Linotype', Georgia, serif;
+  --font-body: 'Cormorant Garamond', 'Book Antiqua', Palatino, Georgia, serif;
+  
+  font-family: var(--font-body);
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 16px;
+  color-scheme: dark;
+  color: var(--color-text-primary);
+  background: var(--color-background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, var(--color-felt) 0%, var(--color-felt-dark) 70%);
+}
+
+#root {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Utility Classes */
+.text-gold {
+  color: var(--color-gold);
+}
+
+.text-red {
+  color: var(--color-red);
+}
+
+.glow-gold {
+  text-shadow: 0 0 10px var(--color-gold);
+}

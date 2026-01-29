@@ -1,0 +1,62 @@
+.background-pattern {
+  position: fixed;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pattern-layer {
+  width: calc(100% + 100px);
+  height: calc(100% + 100px);
+  animation: drift 40s linear infinite;
+}
+
+.pattern-row {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+}
+
+.suit {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.12);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.suit:nth-child(4n+1) { animation-delay: 0s; }
+.suit:nth-child(4n+2) { animation-delay: 1s; }
+.suit:nth-child(4n+3) { animation-delay: 2s; }
+.suit:nth-child(4n+4) { animation-delay: 3s; }
+
+.pattern-row:nth-child(odd) .suit:nth-child(2n) {
+  color: rgba(139, 21, 40, 0.1);
+}
+
+.pattern-row:nth-child(even) .suit:nth-child(2n+1) {
+  color: rgba(139, 21, 40, 0.1);
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50px, -50px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}

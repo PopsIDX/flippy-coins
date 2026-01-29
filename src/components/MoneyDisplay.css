@@ -1,0 +1,38 @@
+/* Money Display Component */
+.money-display {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  transform-origin: center;
+}
+
+.money-text {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: var(--color-gold);
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.money-glow {
+  position: absolute;
+  inset: -10px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 175, 55, 0.6) 0%,
+    rgba(212, 175, 55, 0.3) 30%,
+    transparent 70%
+  );
+  border-radius: var(--radius-md);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}

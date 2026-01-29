@@ -1,0 +1,245 @@
+/* Coin Component */
+.coin {
+  --coin-size: 80px;
+  
+  position: absolute;
+  width: var(--coin-size);
+  height: var(--coin-size);
+  perspective: 800px;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.coin:focus {
+  outline: none;
+}
+
+.coin:focus-visible .coin-inner {
+  box-shadow: 
+    0 0 0 4px var(--color-gold-light),
+    0 0 20px rgba(212, 175, 55, 0.6);
+}
+
+/* Coin Inner Container - handles the 3D flip */
+.coin-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  border-radius: var(--radius-full);
+  transition: transform 0.15s ease;
+}
+
+.coin:hover .coin-inner {
+  transform: scale(1.08);
+}
+
+.coin:active .coin-inner {
+  transform: scale(0.95);
+}
+
+/* Coin Face - smooth shiny design */
+.coin-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Default bronze gradient */
+  background: 
+    radial-gradient(ellipse at 30% 20%, #f4d87c 0%, #d4a744 25%, #b8860b 50%, #8b6914 75%, #654d10 100%);
+  
+  /* Outer glow and depth */
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 8px 20px rgba(255, 255, 255, 0.25),
+    0 0 0 3px #8b6914;
+    
+  transition: box-shadow 0.15s ease;
+}
+
+/* Silver Coin */
+.coin-type-silver .coin-face {
+  background: 
+    radial-gradient(ellipse at 30% 20%, #ffffff 0%, #e8e8e8 25%, #c0c0c0 50%, #a8a8a8 75%, #808080 100%);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 8px 20px rgba(255, 255, 255, 0.4),
+    0 0 0 3px #a8a8a8;
+}
+.coin-type-silver .coin-value {
+  color: #4a4a4a;
+}
+
+/* Gold Coin */
+.coin-type-gold .coin-face {
+  background: 
+    radial-gradient(ellipse at 30% 20%, #fff7cc 0%, #ffd700 25%, #daa520 50%, #b8860b 75%, #8b6508 100%);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 8px 20px rgba(255, 255, 255, 0.35),
+    0 0 0 3px #b8860b;
+}
+.coin-type-gold .coin-value {
+  color: #5c4a0f;
+}
+
+/* Platinum Coin - Premium Purple/Violet Design */
+.coin-type-platinum .coin-face {
+  background: 
+    radial-gradient(ellipse at 30% 20%, #ffffff 0%, #e8d5f0 15%, #c9a8e0 35%, #9b6dc6 55%, #7b4ba8 75%, #5c3380 100%);
+  box-shadow: 
+    0 4px 20px rgba(123, 75, 168, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 25px rgba(60, 20, 80, 0.4),
+    inset 0 8px 25px rgba(255, 255, 255, 0.5),
+    0 0 0 3px #9b6dc6,
+    0 0 25px rgba(155, 109, 198, 0.4);
+  animation: platinum-pulse 2s ease-in-out infinite;
+}
+.coin-type-platinum .coin-value {
+  color: #3a1a50;
+  text-shadow: 
+    0 1px 2px rgba(255, 255, 255, 0.6),
+    0 0 10px rgba(200, 170, 230, 0.5);
+}
+.coin-type-platinum .coin-shine {
+  background: 
+    radial-gradient(ellipse 60% 40% at 35% 25%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 30%, transparent 70%),
+    radial-gradient(ellipse 30% 20% at 70% 75%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
+    linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%);
+}
+.coin-type-platinum:hover .coin-face {
+  box-shadow: 
+    0 8px 30px rgba(123, 75, 168, 0.7),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 25px rgba(60, 20, 80, 0.4),
+    inset 0 8px 25px rgba(255, 255, 255, 0.6),
+    0 0 0 3px #c9a8e0,
+    0 0 40px rgba(155, 109, 198, 0.6);
+}
+
+@keyframes platinum-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 4px 20px rgba(123, 75, 168, 0.5),
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      inset 0 -8px 25px rgba(60, 20, 80, 0.4),
+      inset 0 8px 25px rgba(255, 255, 255, 0.5),
+      0 0 0 3px #9b6dc6,
+      0 0 25px rgba(155, 109, 198, 0.4);
+  }
+  50% {
+    box-shadow: 
+      0 4px 20px rgba(123, 75, 168, 0.6),
+      0 2px 8px rgba(0, 0, 0, 0.3),
+      inset 0 -8px 25px rgba(60, 20, 80, 0.4),
+      inset 0 8px 25px rgba(255, 255, 255, 0.5),
+      0 0 0 3px #b080d0,
+      0 0 35px rgba(180, 130, 220, 0.5);
+  }
+}
+
+/* Diamond Coin */
+.coin-type-diamond .coin-face {
+  background: 
+    radial-gradient(ellipse at 30% 20%, #ffffff 0%, #e0f7ff 25%, #b9f2ff 50%, #7ec8e3 75%, #4ba3c7 100%);
+  box-shadow: 
+    0 4px 15px rgba(75, 163, 199, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 20px rgba(0, 50, 100, 0.2),
+    inset 0 8px 20px rgba(255, 255, 255, 0.6),
+    0 0 0 3px #7ec8e3,
+    0 0 20px rgba(185, 242, 255, 0.4);
+}
+.coin-type-diamond .coin-value {
+  color: #1a4a5a;
+}
+
+/* Coin value number */
+.coin-value {
+  font-family: var(--font-display);
+  font-size: calc(var(--coin-size) * 0.35);
+  font-weight: 700;
+  color: #5c4a0f;
+  text-shadow: 
+    0 1px 1px rgba(255, 255, 255, 0.4),
+    0 -1px 1px rgba(0, 0, 0, 0.2);
+  line-height: 1;
+  z-index: 1;
+  user-select: none;
+}
+
+/* Hover glow effects - per coin type */
+
+/* Bronze (basic) hover */
+.coin-type-basic:hover .coin-face {
+  box-shadow: 
+    0 8px 25px rgba(139, 105, 20, 0.6),
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 8px 20px rgba(255, 255, 255, 0.35),
+    0 0 0 3px #d4a744,
+    0 0 30px rgba(180, 134, 11, 0.5);
+}
+
+/* Silver hover */
+.coin-type-silver:hover .coin-face {
+  box-shadow: 
+    0 8px 25px rgba(150, 150, 150, 0.6),
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 8px 20px rgba(255, 255, 255, 0.5),
+    0 0 0 3px #d0d0d0,
+    0 0 30px rgba(200, 200, 200, 0.5);
+}
+
+/* Gold hover */
+.coin-type-gold:hover .coin-face {
+  box-shadow: 
+    0 8px 25px rgba(218, 165, 32, 0.6),
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 8px 20px rgba(255, 255, 255, 0.4),
+    0 0 0 3px #ffd700,
+    0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* Diamond hover */
+.coin-type-diamond:hover .coin-face {
+  box-shadow: 
+    0 8px 25px rgba(75, 163, 199, 0.7),
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 -8px 20px rgba(0, 50, 100, 0.25),
+    inset 0 8px 20px rgba(255, 255, 255, 0.7),
+    0 0 0 3px #b9f2ff,
+    0 0 35px rgba(185, 242, 255, 0.6);
+}
+
+/* Shiny highlight overlay */
+.coin-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: 
+    radial-gradient(ellipse 60% 40% at 35% 25%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 30%, transparent 70%),
+    radial-gradient(ellipse 30% 20% at 70% 75%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Back face */
+.coin-back {
+  transform: rotateY(180deg);
+}
+
